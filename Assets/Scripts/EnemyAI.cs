@@ -29,6 +29,6 @@ public class EnemyAI : MonoBehaviour
 
     Vector3 generateRandomPosition()
     {
-        return new Vector3(Random.Range(-25, 25), 0, Random.Range(-25, 25));
+        return new Vector3(Random.Range(-25, 25), 0.0f, Random.Range(-25, 25));
     }
 }

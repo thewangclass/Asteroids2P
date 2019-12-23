@@ -34,5 +34,15 @@ public class PlayerController : MonoBehaviour
         playerRb.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime * horizontalInput);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PowerUp"))
+        {
+            Destroy(other.gameObject);
+        } else if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
 }
