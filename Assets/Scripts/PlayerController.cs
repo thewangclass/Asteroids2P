@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]private float thrust = 10.0f;
     [SerializeField] private float rotateSpeed = 90.0f;
-    private float bounds = 25;
     private Rigidbody playerRb;
     
     // Start is called before the first frame update
@@ -20,7 +19,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         MovePlayer();
-        ConstraintPlayerPosition();        
+           
 
     }
 
@@ -35,28 +34,5 @@ public class PlayerController : MonoBehaviour
         playerRb.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime * horizontalInput);
     }
 
-    void ConstraintPlayerPosition()
-    {
-        // wraparound motion
-        if (transform.position.z < -bounds)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, bounds);
-            Debug.Log("Bottom Bound");
-        }
-        else if (transform.position.z > bounds)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -bounds);
-            Debug.Log("Top Bound");
-        }
-        else if (transform.position.x < -bounds)
-        {
-            transform.position = new Vector3(bounds, transform.position.y, transform.position.z);
-            Debug.Log("Left Bound");
-        }
-        else if (transform.position.x > bounds)
-        {
-            transform.position = new Vector3(-bounds, transform.position.y, transform.position.z);
-            Debug.Log("Right Bound");
-        }
-    }
+
 }
