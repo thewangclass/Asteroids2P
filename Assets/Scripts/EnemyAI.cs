@@ -5,14 +5,20 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public GameObject missile;
-    private float speed = 5.0f;
+    private float speed;
 
     private Vector3 targetPosition;
+    private float fieldBoundaries = 25;
+
+    public Transform player;
 
     // Start is called before the first frame update
     void Start()
     {
         targetPosition = generateRandomPosition();
+        speed = generateRandomSpeed();
+        player = GameObject.FindWithTag("Player").transform;
+       
     }
 
     // Update is called once per frame
@@ -24,11 +30,17 @@ public class EnemyAI : MonoBehaviour
         if(Vector3.Distance(transform.position, targetPosition) < 0.001f)
         {
             targetPosition = generateRandomPosition();
+            speed = generateRandomSpeed();
         }
     }
 
     Vector3 generateRandomPosition()
     {
-        return new Vector3(Random.Range(-25, 25), 0.0f, Random.Range(-25, 25));
+        return new Vector3(Random.Range(fieldBoundaries, -fieldBoundaries), 0.0f, Random.Range(fieldBoundaries, -fieldBoundaries));
+    }
+
+    float generateRandomSpeed()
+    {
+        return Random.Range(5, 8);
     }
 }

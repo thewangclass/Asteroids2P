@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private float thrust = 10.0f;
     [SerializeField] private float rotateSpeed = 90.0f;
     private Rigidbody playerRb;
+
+    public GameObject missile;
     
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         MovePlayer();
-           
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(missile, new Vector3(0, 0, 0), transform.rotation);
+        }
 
     }
 
@@ -39,9 +45,10 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("PowerUp"))
         {
             Destroy(other.gameObject);
-        } else if (other.gameObject.CompareTag("Enemy"))
+        } else if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("EnemyBullet"))
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+            Destroy(other.gameObject);
         }
     }
 
